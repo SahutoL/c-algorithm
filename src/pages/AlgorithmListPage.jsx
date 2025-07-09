@@ -1,31 +1,46 @@
-import { useState } from 'react';
-import { Search, Clock, Zap, CheckCircle, XCircle, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button.jsx';
-import { algorithmCategories, algorithms } from '../data/algorithms.js';
+import { useState } from "react";
+import {
+  Search,
+  Clock,
+  Zap,
+  CheckCircle,
+  XCircle,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button.jsx";
+import { algorithmCategories, algorithms } from "../data/algorithms.js";
 
 const AlgorithmListPage = ({ onSelectAlgorithm }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // 検索とフィルタリング
-  const filteredAlgorithms = Object.values(algorithms).filter(algorithm => {
-    const matchesSearch = algorithm.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         algorithm.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || algorithm.category === selectedCategory;
+  const filteredAlgorithms = Object.values(algorithms).filter((algorithm) => {
+    const matchesSearch =
+      algorithm.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      algorithm.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" || algorithm.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   // 計算量の表示用関数
   const getComplexityColor = (complexity) => {
-    if (complexity.includes('1')) return 'text-green-600 bg-green-50';
-    if (complexity.includes('log')) return 'text-blue-600 bg-blue-50';
-    if (complexity.includes('n²') || complexity.includes('n^2')) return 'text-red-600 bg-red-50';
-    if (complexity.includes('n')) return 'text-yellow-600 bg-yellow-50';
-    return 'text-gray-600 bg-gray-50';
+    if (complexity.includes("1")) return "text-green-600 bg-green-50";
+    if (complexity.includes("log")) return "text-blue-600 bg-blue-50";
+    if (complexity.includes("n²") || complexity.includes("n^2"))
+      return "text-red-600 bg-red-50";
+    if (complexity.includes("n")) return "text-yellow-600 bg-yellow-50";
+    return "text-gray-600 bg-gray-50";
   };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3540900632101010"
+        crossorigin="anonymous"
+      ></script>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ヘッダー */}
         <div className="text-center mb-12">
@@ -60,7 +75,7 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="all">全てのカテゴリ</option>
-                {algorithmCategories.map(category => (
+                {algorithmCategories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
@@ -77,7 +92,7 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
 
         {/* アルゴリズムカード */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredAlgorithms.map(algorithm => (
+          {filteredAlgorithms.map((algorithm) => (
             <div
               key={algorithm.id}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
@@ -90,7 +105,11 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
                       {algorithm.name}
                     </h3>
                     <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                      {algorithmCategories.find(cat => cat.id === algorithm.category)?.name}
+                      {
+                        algorithmCategories.find(
+                          (cat) => cat.id === algorithm.category
+                        )?.name
+                      }
                     </span>
                   </div>
                 </div>
@@ -110,17 +129,29 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {algorithm.timeComplexity.best && (
-                        <span className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(algorithm.timeComplexity.best)}`}>
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(
+                            algorithm.timeComplexity.best
+                          )}`}
+                        >
                           最良: {algorithm.timeComplexity.best}
                         </span>
                       )}
                       {algorithm.timeComplexity.average && (
-                        <span className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(algorithm.timeComplexity.average)}`}>
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(
+                            algorithm.timeComplexity.average
+                          )}`}
+                        >
                           平均: {algorithm.timeComplexity.average}
                         </span>
                       )}
                       {algorithm.timeComplexity.worst && (
-                        <span className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(algorithm.timeComplexity.worst)}`}>
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(
+                            algorithm.timeComplexity.worst
+                          )}`}
+                        >
                           最悪: {algorithm.timeComplexity.worst}
                         </span>
                       )}
@@ -133,7 +164,11 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
                       <Zap className="h-4 w-4 mr-1" />
                       空間計算量
                     </h4>
-                    <span className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(algorithm.spaceComplexity)}`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded ${getComplexityColor(
+                        algorithm.spaceComplexity
+                      )}`}
+                    >
                       {algorithm.spaceComplexity}
                     </span>
                   </div>
@@ -148,8 +183,12 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
                       ) : (
                         <XCircle className="h-4 w-4 text-red-600 mr-1" />
                       )}
-                      <span className={algorithm.stable ? 'text-green-600' : 'text-red-600'}>
-                        {algorithm.stable ? '安定' : '不安定'}
+                      <span
+                        className={
+                          algorithm.stable ? "text-green-600" : "text-red-600"
+                        }
+                      >
+                        {algorithm.stable ? "安定" : "不安定"}
                       </span>
                     </div>
                   )}
@@ -160,8 +199,12 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
                       ) : (
                         <XCircle className="h-4 w-4 text-red-600 mr-1" />
                       )}
-                      <span className={algorithm.inPlace ? 'text-green-600' : 'text-red-600'}>
-                        {algorithm.inPlace ? 'インプレース' : '追加メモリ必要'}
+                      <span
+                        className={
+                          algorithm.inPlace ? "text-green-600" : "text-red-600"
+                        }
+                      >
+                        {algorithm.inPlace ? "インプレース" : "追加メモリ必要"}
                       </span>
                     </div>
                   )}
@@ -195,8 +238,8 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
             <Button
               variant="outline"
               onClick={() => {
-                setSearchTerm('');
-                setSelectedCategory('all');
+                setSearchTerm("");
+                setSelectedCategory("all");
               }}
             >
               フィルターをリセット
@@ -209,4 +252,3 @@ const AlgorithmListPage = ({ onSelectAlgorithm }) => {
 };
 
 export default AlgorithmListPage;
-

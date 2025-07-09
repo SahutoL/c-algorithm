@@ -3,6 +3,11 @@ import { Code, Heart } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3540900632101010"
+        crossorigin="anonymous"
+      ></script>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* サイト情報 */}
